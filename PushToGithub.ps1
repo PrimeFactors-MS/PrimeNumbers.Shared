@@ -1,0 +1,1 @@
+dotnet nuget push .\PrimeNumbers.Shared.PrimeCalculation\bin\x64\Release\net5.0\publish\PrimeNumbers.Shared.PrimeCalculation.1.0.0.nupkg -s PrimeNumbers
