@@ -7,16 +7,10 @@ namespace PrimeNumbers.Shared.PrimeCalculation
     {
         public static PrimeCalculationResult GetPrimes(ulong number)
         {
-            List<ulong> primes = new List<ulong>();
+            List<ulong> primes;
             PrimeCalculationResult result = new PrimeCalculationResult();
-            ulong curNumber = number;
 
-            while (curNumber > 1)
-            {
-                ulong curDivider = FindLowestDivider(curNumber);
-                primes.Add(curDivider);
-                curNumber /= curDivider;
-            }
+            primes = DivideToPrimeFactors(number);
 
             if(IsNumberPrime(primes))
             {
@@ -35,18 +29,44 @@ namespace PrimeNumbers.Shared.PrimeCalculation
         /// Returns if a number is prime by its prime dividors
         private static bool IsNumberPrime(List<ulong> primesOfNumber) => primesOfNumber.Count == 1;
 
-        private static ulong FindLowestDivider(ulong number)
+
+        /*
+         *  Code taken from GeeksForGeeks
+         *  Source: https://www.geeksforgeeks.org/print-all-prime-factors-of-a-given-number/
+         */
+
+        private static List<ulong> DivideToPrimeFactors(ulong n)
         {
-            ulong divider = number;
-            for (ulong i = 2; i < number / 2 + 1; i++)
+            List<ulong> factors = new();
+
+            // Print the number of 2s that divide n 
+            while (n % 2 == 0)
             {
-                if (number % i == 0)
+                factors.Add(2);
+                n /= 2;
+            }
+
+            // n must be odd at this point. So we can 
+            // skip one element (Note i = i +2) 
+            for (ulong i = 3; i <= Math.Sqrt(n); i += 2)
+            {
+                // While i divides n, print i and divide n 
+                while (n % i == 0)
                 {
-                    divider = i;
-                    break;
+                    factors.Add(i);
+                    n /= i;
                 }
             }
-            return divider;
+
+            // This condition is to handle the case when 
+            // n is a prime number greater than 2 
+            if (n > 2)
+            {
+                factors.Add(n);
+            }
+
+            return factors;
         }
+
     }
 }

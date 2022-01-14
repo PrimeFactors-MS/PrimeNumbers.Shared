@@ -6,6 +6,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Platforms>AnyCPU;x64</Platforms>
     <RepositoryUrl>https://github.com/PrimeFactors-MS/PrimeNumbers.Shared</RepositoryUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
   
 </Project>
